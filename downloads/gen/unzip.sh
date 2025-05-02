@@ -1,45 +1,38 @@
 cd "/Users/omi/Documents/SEM 2/Multi-Screen/p5mirror-omi/downloads/../p5projects"
 #
-echo unzip 1 "Responsive Highway-8hTgy4Iu2"
-rm -rf "./Responsive Highway-8hTgy4Iu2"
-mkdir "./Responsive Highway-8hTgy4Iu2"
-pushd "./Responsive Highway-8hTgy4Iu2" > /dev/null
-unzip -q "../../downloads/zips/Responsive Highway-8hTgy4Iu2"
+echo unzip 1 "Transience omi v1.5-PCh5Aznez"
+rm -rf "./Transience omi v1.5-PCh5Aznez"
+mkdir "./Transience omi v1.5-PCh5Aznez"
+pushd "./Transience omi v1.5-PCh5Aznez" > /dev/null
+unzip -q "../../downloads/zips/Transience omi v1.5-PCh5Aznez"
 popd > /dev/null
 #
-echo unzip 2 "ims-01 bounce fullscreen copy-rJU4alwsJ"
-rm -rf "./ims-01 bounce fullscreen copy-rJU4alwsJ"
-mkdir "./ims-01 bounce fullscreen copy-rJU4alwsJ"
-pushd "./ims-01 bounce fullscreen copy-rJU4alwsJ" > /dev/null
-unzip -q "../../downloads/zips/ims-01 bounce fullscreen copy-rJU4alwsJ"
+echo unzip 2 "Transience 2-fceJhpMM6"
+rm -rf "./Transience 2-fceJhpMM6"
+mkdir "./Transience 2-fceJhpMM6"
+pushd "./Transience 2-fceJhpMM6" > /dev/null
+unzip -q "../../downloads/zips/Transience 2-fceJhpMM6"
 popd > /dev/null
 #
-echo unzip 3 "the highway-ou7d_FZKZ"
-rm -rf "./the highway-ou7d_FZKZ"
-mkdir "./the highway-ou7d_FZKZ"
-pushd "./the highway-ou7d_FZKZ" > /dev/null
-unzip -q "../../downloads/zips/the highway-ou7d_FZKZ"
+echo unzip 3 "Transience-ohwy2A1tC"
+rm -rf "./Transience-ohwy2A1tC"
+mkdir "./Transience-ohwy2A1tC"
+pushd "./Transience-ohwy2A1tC" > /dev/null
+unzip -q "../../downloads/zips/Transience-ohwy2A1tC"
 popd > /dev/null
 #
-echo unzip 4 "helloWorld-rafPm5zcI"
-rm -rf "./helloWorld-rafPm5zcI"
-mkdir "./helloWorld-rafPm5zcI"
-pushd "./helloWorld-rafPm5zcI" > /dev/null
-unzip -q "../../downloads/zips/helloWorld-rafPm5zcI"
-popd > /dev/null
-#
-echo unzip 5 "helloWorld 2-_czmZi6jr"
+echo unzip 4 "helloWorld 2-_czmZi6jr"
 rm -rf "./helloWorld 2-_czmZi6jr"
 mkdir "./helloWorld 2-_czmZi6jr"
 pushd "./helloWorld 2-_czmZi6jr" > /dev/null
 unzip -q "../../downloads/zips/helloWorld 2-_czmZi6jr"
 popd > /dev/null
 #
-echo unzip 6 "Portrait Exp-mHMXjWGxF"
-rm -rf "./Portrait Exp-mHMXjWGxF"
-mkdir "./Portrait Exp-mHMXjWGxF"
-pushd "./Portrait Exp-mHMXjWGxF" > /dev/null
-unzip -q "../../downloads/zips/Portrait Exp-mHMXjWGxF"
+echo unzip 5 "helloWorld-rafPm5zcI"
+rm -rf "./helloWorld-rafPm5zcI"
+mkdir "./helloWorld-rafPm5zcI"
+pushd "./helloWorld-rafPm5zcI" > /dev/null
+unzip -q "../../downloads/zips/helloWorld-rafPm5zcI"
 popd > /dev/null
 
 cd ..

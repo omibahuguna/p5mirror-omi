@@ -3151,8 +3151,8 @@
         "fileType": "folder",
         "isSelectedFile": false,
         "_id": "67e9f15016a6925338b98629",
-        "createdAt": "2025-03-31T03:32:22.291Z",
-        "updatedAt": "2025-03-31T03:32:22.291Z",
+        "createdAt": "2025-04-06T19:23:27.014Z",
+        "updatedAt": "2025-04-06T19:23:27.014Z",
         "id": "67e9f15016a6925338b98629"
       },
       {
@@ -3162,8 +3162,8 @@
         "fileType": "file",
         "isSelectedFile": false,
         "_id": "67e9f15016a6925338b9862a",
-        "createdAt": "2025-03-31T03:32:22.291Z",
-        "updatedAt": "2025-03-31T03:32:22.291Z",
+        "createdAt": "2025-04-06T19:23:27.014Z",
+        "updatedAt": "2025-04-06T19:23:27.014Z",
         "id": "67e9f15016a6925338b9862a"
       },
       {
@@ -3173,13 +3173,13 @@
         "fileType": "file",
         "isSelectedFile": true,
         "_id": "67e9f15016a6925338b9862b",
-        "createdAt": "2025-03-31T03:32:22.291Z",
-        "updatedAt": "2025-03-31T03:32:22.291Z",
+        "createdAt": "2025-04-06T19:23:27.014Z",
+        "updatedAt": "2025-04-06T19:23:27.014Z",
         "id": "67e9f15016a6925338b9862b"
       }
     ],
     "createdAt": "2025-03-31T01:35:12.219Z",
-    "updatedAt": "2025-03-31T03:32:22.291Z",
+    "updatedAt": "2025-04-06T19:23:27.014Z",
     "id": "rafPm5zcI"
   },
   {
@@ -3196,8 +3196,8 @@
         "fileType": "folder",
         "isSelectedFile": false,
         "_id": "67e9ffbd16a6925338b9862c",
-        "createdAt": "2025-03-31T02:48:42.871Z",
-        "updatedAt": "2025-03-31T02:48:42.871Z",
+        "createdAt": "2025-04-07T21:14:15.045Z",
+        "updatedAt": "2025-04-07T21:14:15.045Z",
         "id": "67e9ffbd16a6925338b9862c"
       },
       {
@@ -3207,24 +3207,24 @@
         "fileType": "file",
         "isSelectedFile": false,
         "_id": "67e9ffbd16a6925338b9862d",
-        "createdAt": "2025-03-31T02:48:42.871Z",
-        "updatedAt": "2025-03-31T02:48:42.871Z",
+        "createdAt": "2025-04-07T21:14:15.045Z",
+        "updatedAt": "2025-04-07T21:14:15.045Z",
         "id": "67e9ffbd16a6925338b9862d"
       },
       {
         "name": "sketch.js",
-        "content": "let video;\nlet bodyPose;\nlet poses = [];\n\n\nlet cols = 80; // Number of columns\nlet colWidth;\nlet capturedFrames = [];\nlet currentCol = 0;\nlet lastCaptureTime = 0;\nlet captureInterval = 50; // Capture interval (in milliseconds)\nlet capturing = false;\nlet captureDirection = 1; // Default direction is left to right\nlet triggered = false;\n\nfunction preload() {\n  bodyPose = ml5.bodyPose();\n}\n\nfunction setup() {\n  createCanvas(640, 480);\n  video = createCapture(VIDEO);\n  video.size(640, 480);\n  video.hide();\n  colWidth = width / cols;\n  bodyPose.detectStart(video, gotPoses);\n}\n\nfunction draw() {\n  // Display the video on canvas\n  image(video, 0, 0, width, height);\n  \n  // Capture columns\n  if (capturing && millis() - lastCaptureTime > captureInterval && currentCol < cols && currentCol >= 0) {\n    let x = currentCol * colWidth;\n    let colImage = video.get(x, 0, colWidth, height); // Capture column\n    capturedFrames[currentCol] = colImage;\n    lastCaptureTime = millis();\n    currentCol += captureDirection; // Move to the next column in the direction\n  }\n  \n  // Draw the captured frames\n  for (let i = 0; i < capturedFrames.length; i++) {\n    if (capturedFrames[i]) {\n      image(capturedFrames[i], i * colWidth, 0);\n    }\n  }\n}\n\n// Callback function to handle detected poses\nfunction gotPoses(results) {\n  poses = results;\n  if (!triggered && poses.length > 0) {\n    for (let i = 0; i < poses.length; i++) {\n      let pose = poses[i];\n      for (let j = 0; j < pose.keypoints.length; j++) {\n        let keypoint = pose.keypoints[j];\n        if (keypoint.confidence > 0.1) {\n          let section = getSection(keypoint.x); // Determine which section the keypoint is in\n          if (section === 'left') {\n            currentCol = 0;\n            captureDirection = 1; // Capture from left to right\n          } else if (section === 'right') {\n            currentCol = cols - 1;\n            captureDirection = -1; // Capture from right to left\n          } else {\n            return; // Ignore if it's in the center\n          }\n          capturing = true;\n          triggered = true; // Trigger the capture process\n          lastCaptureTime = millis();\n          break;\n        }\n      }\n      if (triggered) break;\n    }\n  }\n}\n\n// Helper function to determine if the keypoint is in the left, center, or right section\nfunction getSection(x) {\n  if (x < width / 3) return 'left'; // Left third of the canvas\n  if (x > (2 * width) / 3) return 'right'; // Right third of the canvas\n  return 'center'; // Center section\n}\n",
+        "content": "    let video;\nlet bodyPose;\nlet poses = [];\n\nlet cols = 160;\nlet colWidth;\nlet capturedFrames = [];\nlet currentCol = 0;\nlet lastCaptureTime = 0;\nlet captureInterval = 1; //ms\nlet capturing = false;\nlet captureDirection = 1;\nlet triggered = false;\n\nfunction preload() {\n  bodyPose = ml5.bodyPose({ flipped: true });\n}\n\nfunction setup() {\n  createCanvas(1600, 1200);\n  colWidth = width / cols;\n\n  video = createCapture(VIDEO);\n  video.size(1600, 1200);\n  video.hide();\n\n  bodyPose.detectStart(video, gotPoses);\n}\n\nfunction draw() {\n  // Draw flipped video feed\n  push();\n  translate(width, 0);\n  scale(-1, 1);\n  image(video, 0, 0, width, height);\n  pop();\n\n  // Capture columns when triggered\n  if (\n    capturing && millis() - lastCaptureTime > captureInterval && currentCol < cols && currentCol >= 0\n  ) { let x = width - (currentCol + 1) * colWidth;\n    let colImage = createImage(colWidth, height);\n    colImage.copy(video, x, 0, colWidth, height, 0, 0, colWidth, height);\n\n    // Flip pixels inside the column\n    colImage.loadPixels();\n    for (let y = 0; y < colImage.height; y++) {\n      for (let i = 0; i < colWidth / 2; i++) {\n        let leftIdx = 4 * (y * colWidth + i);\n        let rightIdx = 4 * (y * colWidth + (colWidth - i - 1));\n        for (let k = 0; k < 4; k++) {\n          let temp = colImage.pixels[leftIdx + k];\n          colImage.pixels[leftIdx + k] = colImage.pixels[rightIdx + k];\n          colImage.pixels[rightIdx + k] = temp;\n        }\n      }\n    }\n    colImage.updatePixels();\n\n    capturedFrames[currentCol] = colImage;\n    lastCaptureTime = millis();\n    currentCol += captureDirection;\n  }\n\n  // Draw captured columns over the video\n  for (let i = 0; i < capturedFrames.length; i++) {\n    if (capturedFrames[i]) {\n      image(capturedFrames[i], i * colWidth, 0);\n    }\n  }\n}\n\nfunction gotPoses(results) {\n  poses = results;\n  if (!triggered && poses.length > 0) {\n    for (let i = 0; i < poses.length; i++) {\n      let pose = poses[i];\n      for (let j = 0; j < pose.keypoints.length; j++) {\n        let keypoint = pose.keypoints[j];\n        if (keypoint.confidence > 0.1) {\n          let section = getSection(keypoint.x);\n          if (section === 'left') {\n            currentCol = 0;\n            captureDirection = 1;\n          } else if (section === 'right') {\n            currentCol = cols - 1;\n            captureDirection = -1;\n          } else {\n            return;\n          }\n          capturing = true;\n          triggered = true;\n          lastCaptureTime = millis();\n          break;\n        }\n      }\n      if (triggered) break;\n    }\n  }\n}\n\nfunction getSection(x) {\n  if (x < width / 3) return 'left';\n  if (x > (2 * width) / 3) return 'right';\n  return 'center';\n}\n",
         "children": [],
         "fileType": "file",
         "isSelectedFile": true,
         "_id": "67e9ffbd16a6925338b9862e",
-        "createdAt": "2025-03-31T02:48:42.871Z",
-        "updatedAt": "2025-03-31T02:48:42.871Z",
+        "createdAt": "2025-04-07T21:14:15.045Z",
+        "updatedAt": "2025-04-07T21:14:15.045Z",
         "id": "67e9ffbd16a6925338b9862e"
       }
     ],
     "createdAt": "2025-03-31T02:36:49.280Z",
-    "updatedAt": "2025-03-31T02:48:42.871Z",
+    "updatedAt": "2025-04-07T21:14:15.045Z",
     "id": "_czmZi6jr"
   },
   {
@@ -9170,6 +9170,153 @@
     "updatedAt": "2025-03-10T00:07:38.210Z",
     "createdAt": "2025-03-10T00:07:34.913Z",
     "id": "OOxEXNkjm"
+  },
+  {
+    "_id": "ohwy2A1tC",
+    "name": "Transience",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "67f440288014f90b4f06caca",
+          "67f440288014f90b4f06cacb"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "67f440288014f90b4f06cac9",
+        "createdAt": "2025-04-25T14:52:34.187Z",
+        "updatedAt": "2025-04-25T14:52:34.187Z",
+        "id": "67f440288014f90b4f06cac9"
+      },
+      {
+        "name": "index.html",
+        "content": "<!--\n  👋 Hello! This is an ml5.js example made and shared with ❤️.\n  Learn more about the ml5.js project: https://ml5js.org/\n  ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md\n\n  This example demonstrates drawing skeletons on poses for the MoveNet model.\n-->\n\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>ml5.js bodyPose Skeleton Example</title>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js\"></script>\n    <script src=\"https://unpkg.com/ml5@1/dist/ml5.min.js\"></script>\n  </head>\n\n  <body>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "67f440288014f90b4f06caca",
+        "createdAt": "2025-04-25T14:52:34.187Z",
+        "updatedAt": "2025-04-25T14:52:34.187Z",
+        "id": "67f440288014f90b4f06caca"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// Dan Shiffman slit-scan tutorial: https://www.youtube.com/watch?v=WCJM9WIoudI\n\n// a sketch that employs ml5 to detect human bodies which triggers a slit-scan photo capture\n\nlet video;\nlet bodyPose;\nlet poses = [];\n\nlet cols = 160; // no. of columns\nlet colWidth;\nlet capturedFrames = [];\nlet currentCol = 0;\nlet lastCaptureTime = 0;\nlet captureInterval = 1; //ms\nlet capturing = false;\nlet captureDirection = 1; // 1 towards right, -1 towards left\nlet triggered = false;\nlet lastPoseDetected = false; \n\nfunction preload() {\n  bodyPose = ml5.bodyPose({ flipped: true }); // ml5 with flipped video\n}\n\nfunction setup() {\n  createCanvas(1600, 1200); \n  colWidth = width / cols;\n\n  video = createCapture(VIDEO);\n  video.size(1600, 1200);\n  video.hide();\n\n  bodyPose.detectStart(video, gotPoses); // pose detection\n}\n\nfunction draw() {\n  push();\n  translate(width, 0);\n  scale(-1, 1); // mirror the video\n  image(video, 0, 0, width, height);\n  pop();\n\n  if (\n    capturing && millis() - lastCaptureTime > captureInterval && currentCol < cols && currentCol >= 0\n  ) {\n    let x = width - (currentCol + 1) * colWidth;\n    let colImage = createImage(colWidth, height);\n    colImage.copy(video, x, 0, colWidth, height, 0, 0, colWidth, height); // image of the column\n\n    // flipping the columns horizontally\n    colImage.loadPixels();\n    for (let y = 0; y < colImage.height; y++) {\n      for (let i = 0; i < colWidth / 2; i++) {\n        let leftIdx = 4 * (y * colWidth + i);\n        let rightIdx = 4 * (y * colWidth + (colWidth - i - 1));\n        for (let k = 0; k < 4; k++) {\n          let temp = colImage.pixels[leftIdx + k];\n          colImage.pixels[leftIdx + k] = colImage.pixels[rightIdx + k];\n          colImage.pixels[rightIdx + k] = temp;\n        }\n      }\n    }\n    colImage.updatePixels();\n\n    // Store the captured column image & update capture state\n    capturedFrames[currentCol] = colImage;\n    lastCaptureTime = millis();\n    currentCol += captureDirection;\n\n    // Check if capture is complete\n    if (currentCol >= cols || currentCol < 0) {\n      capturing = false; // Stop capturing\n      triggered = false; // Allow new pose detection\n    }\n  }\n// draw captured columns on canvas\n  for (let i = 0; i < capturedFrames.length; i++) {\n    if (capturedFrames[i]) {\n      image(capturedFrames[i], i * colWidth, 0);\n    }\n  }\n}\n\nfunction gotPoses(results) {\n  poses = results;\n\n  let poseNowDetected = poses.length > 0;\n\n  // Trigger capture when pose is detected and not already capturing: code by chatGPT\n  if (poseNowDetected && !lastPoseDetected && !capturing) {\n    let pose = poses[0]; // Use first detected pose\n    for (let j = 0; j < pose.keypoints.length; j++) {\n      let keypoint = pose.keypoints[j];\n      if (keypoint.confidence > 0.1) {\n        let section = getSection(keypoint.x);\n        if (section === 'left') {\n          currentCol = 0;\n          captureDirection = 1;\n        } else if (section === 'right') {\n          currentCol = cols - 1;\n          captureDirection = -1;\n        } else {\n          return; // do nothing if subject in center\n        }\n        capturedFrames = [];\n        capturing = true;\n        triggered = true;\n        lastCaptureTime = millis();\n        break;\n      }\n    }\n  }\n\n  lastPoseDetected = poseNowDetected;\n}\n\n// where the subject is in the frame\nfunction getSection(x) {\n  if (x < width / 3) return 'left';\n  if (x > (2 * width) / 3) return 'right';\n  return 'center';\n}\n\n// Save image on keypress\nfunction keyPressed() {\n  if (key === 's' || key === 'S') {\n    saveCanvas('slit-scan-capture', 'png');\n  }\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "67f440288014f90b4f06cacb",
+        "createdAt": "2025-04-25T14:52:34.187Z",
+        "updatedAt": "2025-04-25T14:52:34.187Z",
+        "id": "67f440288014f90b4f06cacb"
+      }
+    ],
+    "createdAt": "2025-04-07T21:14:16.877Z",
+    "updatedAt": "2025-04-25T14:52:34.187Z",
+    "id": "ohwy2A1tC"
+  },
+  {
+    "_id": "fceJhpMM6",
+    "name": "Transience 2",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "680b9e526369de1d9e17d96f",
+          "680b9e526369de1d9e17d970"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "680b9e526369de1d9e17d96e",
+        "createdAt": "2025-04-28T14:05:31.778Z",
+        "updatedAt": "2025-04-28T14:05:31.778Z",
+        "id": "680b9e526369de1d9e17d96e"
+      },
+      {
+        "name": "index.html",
+        "content": "<!--\n  👋 Hello! This is an ml5.js example made and shared with ❤️.\n  Learn more about the ml5.js project: https://ml5js.org/\n  ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md\n\n  This example demonstrates drawing skeletons on poses for the MoveNet model.\n-->\n\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>ml5.js bodyPose Skeleton Example</title>\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js\"></script>\n    <script src=\"https://unpkg.com/ml5@1/dist/ml5.min.js\"></script>\n  </head>\n\n  <body>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "680b9e526369de1d9e17d96f",
+        "createdAt": "2025-04-28T14:05:31.778Z",
+        "updatedAt": "2025-04-28T14:05:31.778Z",
+        "id": "680b9e526369de1d9e17d96f"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// https://editor.p5js.org/jht9629-nyu/sketches/P_fljj9ev\n// Transience omi v1\n// createGraphics use to scale video\n// to full screen with correct aspect ratio\n\n// https://omibahuguna.github.io/ims-2025-omi/Transience/\n// https://editor.p5js.org/omi99/sketches\n// https://editor.p5js.org/omi99/sketches/ohwy2A1tC\n\n// Dan Shiffman slit-scan tutorial: https://www.youtube.com/watch?v=WCJM9WIoudI\n\n// a sketch that employs ml5 to detect human bodies which triggers a slit-scan photo capture\n\nlet video;\nlet bodyPose;\nlet poses = [];\n\nlet cols;\nlet colWidth;\nlet capturedFrames = [];\nlet currentCol = 0;\nlet lastCaptureTime = 0;\nlet captureInterval = 0; //ms\nlet capturing = false;\nlet captureDirection = 1; // 1 towards right, -1 towards left\nlet triggered = false;\nlet lastPoseDetected = false;\nlet columnsPerFrame = 5\n\nlet my = {};\n\nfunction preload() {\n  bodyPose = ml5.bodyPose({ flipped: true }); // ml5 with flipped video\n}\n\nfunction setup() {\n  createCanvas(windowWidth, windowHeight - 60); // responsive canvas\n  // createCanvas(1600, 1200);\n  // colWidth = width / cols;\npixelDensity (1);\n  video = createCapture(VIDEO, () => {\n  console.log('createCapture callback width height', video.width, video.height);\n  my.layer = createGraphics(video.width, video.height); // flexible capture\n  colWidth = 1;\n  cols = video.width;\n  });\n  // video.size(960, 540);\n  // video.size(1920, 1080);\n  // video.size(1600, 1200);\n  video.hide();\n\n  // pose detection\n  bodyPose.detectStart(video, gotPoses);\n\n  create_ui();\n  \n}\n\nfunction draw() {\n  \n  let layer = my.layer; // my layer\n  if (!layer) {\n    // console.log('waiting for video', millis() / 1000);\n    return;\n  }\n  render_layer(layer); // storing video height/width\n  background(0);\n  let dw = width;\n  let dh = height;\n  let sw = layer.width;\n  let sh = layer.height;\n  // Correct for the video aspect ratio\n  dh = dw * (sh / sw);\n  // Image video to full width of canvas\n  // height is adjusted for aspect ratio\n  image(layer, 0, 0, dw, dh, 0, 0, sw, sh);\n}\n\n// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])\n\nfunction render_layer(layer) {\n  // In video dimensions\n  let width = video.width;\n  let height = video.height;\n  layer.push();\n  layer.translate(width, 0);\n  layer.scale(-1, 1); // mirror the video\n  layer.image(video, 0, 0, width, height);\n  layer.pop();\n\n  let lapsed = millis() - lastCaptureTime > captureInterval;\n  if (capturing && lapsed && currentCol < cols && currentCol >= 0) {\n    let x = width - (currentCol + 1) * colWidth;\n    let colImage = createImage(colWidth, height);\n    // image of the column\n    colImage.copy(video, x, 0, colWidth, height, 0, 0, video.width, height);\n\n    // // flipping the columns horizontally\n    // colImage.loadPixels();\n    // for (let y = 0; y < colImage.height; y++) {\n    //   for (let i = 0; i < colWidth / 2; i++) {\n    //     let leftIdx = 4 * (y * colWidth + i);\n    //     let rightIdx = 4 * (y * colWidth + (colWidth - i - 1));\n    //     for (let k = 0; k < 4; k++) {\n    //       let temp = colImage.pixels[leftIdx + k];\n    //       colImage.pixels[leftIdx + k] = colImage.pixels[rightIdx + k];\n    //       colImage.pixels[rightIdx + k] = temp;\n    //     }\n    //   }\n    // }\n    // colImage.updatePixels();\n\n    // Store the captured column image & update capture state\n    capturedFrames[currentCol] = colImage;\n    lastCaptureTime = millis();\n    currentCol += captureDirection;\n\n    // Check if capture is complete\n    if (currentCol >= cols || currentCol < 0) {\n      capturing = false; // Stop capturing\n      triggered = false; // Allow new pose detection\n    }\n  }\n  // draw captured columns on the layer\n  for (let i = 0; i < capturedFrames.length; i++) {\n    if (capturedFrames[i]) {\n      layer.image(capturedFrames[i], i * colWidth, 0);\n    }\n  }\n}\n\nfunction gotPoses(results) {\n  poses = results;\n\n  let poseNowDetected = poses.length > 0;\n\n  // Trigger capture when pose is detected and not already capturing: code by chatGPT\n  if (poseNowDetected && !lastPoseDetected && !capturing) {\n    let pose = poses[0]; // Use first detected pose\n    for (let j = 0; j < pose.keypoints.length; j++) {\n      let keypoint = pose.keypoints[j];\n      if (keypoint.confidence > 0.1) {\n        let section = getSection(keypoint.x);\n        if (section === 'left') {\n          currentCol = 0;\n          captureDirection = 1;\n        } else if (section === 'right') {\n          currentCol = cols - 1;\n          captureDirection = -1;\n        } else {\n          return; // do nothing if subject in center\n        }\n        capturedFrames = [];\n        capturing = true;\n        triggered = true;\n        lastCaptureTime = millis();\n        break;\n      }\n    }\n  }\n\n  lastPoseDetected = poseNowDetected;\n}\n\n// where the subject is in the frame\nfunction getSection(x) {\n  // In video dimensions\n  let width = video.width;\n  if (x < width / 3) return 'left';\n  if (x > (2 * width) / 3) return 'right';\n  return 'center';\n}\n\n// Save image on keypress\nfunction keyPressed() {\n  if (key === 's' || key === 'S') {\n    saveCanvas('slit-scan-capture', 'png');\n  }\n}\n\nfunction create_ui() {\n  my.fullScreenBtn = createButton('?v=24 Full Screen');\n  my.fullScreenBtn.mousePressed(full_screen_action);\n  my.fullScreenBtn.style('font-size:42px');\n}\n\nfunction full_screen_action() {\n  my.fullScreenBtn.remove();\n  fullscreen(1);\n  let delay = 3000;\n  setTimeout(ui_present_window, delay);\n}\n\nfunction ui_present_window() {\n  resizeCanvas(windowWidth, windowHeight);\n  // init_dim();\n}\n\nfunction windowResized() {\n  resizeCanvas(windowWidth, windowHeight);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "680b9e526369de1d9e17d970",
+        "createdAt": "2025-04-28T14:05:31.778Z",
+        "updatedAt": "2025-04-28T14:05:31.778Z",
+        "id": "680b9e526369de1d9e17d970"
+      }
+    ],
+    "createdAt": "2025-04-25T14:38:11.027Z",
+    "updatedAt": "2025-04-28T14:05:31.778Z",
+    "id": "fceJhpMM6"
+  },
+  {
+    "_id": "PCh5Aznez",
+    "name": "Transience omi v1.5",
+    "files": [
+      {
+        "name": "root",
+        "content": "",
+        "children": [
+          "680b99f1c205379b962570f4",
+          "680b99f1c205379b962570f5",
+          "680b99f1c205379b962570f6"
+        ],
+        "fileType": "folder",
+        "isSelectedFile": false,
+        "_id": "680b99f1c205379b962570f3",
+        "createdAt": "2025-05-02T13:36:33.775Z",
+        "updatedAt": "2025-05-02T13:36:33.775Z",
+        "id": "680b99f1c205379b962570f3"
+      },
+      {
+        "name": "index.html",
+        "content": "<!--\n  👋 Hello! This is an ml5.js example made and shared with ❤️.\n  Learn more about the ml5.js project: https://ml5js.org/\n  ml5.js license and Code of Conduct: https://github.com/ml5js/ml5-next-gen/blob/main/LICENSE.md\n  This example demonstrates drawing skeletons on poses for the MoveNet model.\n-->\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>?v=23 omi-transience</title>\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js\"></script>\n    <script src=\"https://unpkg.com/ml5@1/dist/ml5.min.js\"></script>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n  </head>\n\n  <body>\n    <script src=\"sketch.js\"></script>\n  </body>\n</html>\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "680b99f1c205379b962570f4",
+        "createdAt": "2025-05-02T13:36:33.775Z",
+        "updatedAt": "2025-05-02T13:36:33.775Z",
+        "id": "680b99f1c205379b962570f4"
+      },
+      {
+        "name": "sketch.js",
+        "content": "// https://editor.p5js.org/jht9629-nyu/sketches/P_fljj9ev\n// Transience omi v1\n// createGraphics use to scale video\n// to full screen with correct aspect ratio\n\n// https://omibahuguna.github.io/ims-2025-omi/Transience/\n// https://editor.p5js.org/omi99/sketches\n// https://editor.p5js.org/omi99/sketches/ohwy2A1tC\n\n// Dan Shiffman slit-scan tutorial: https://www.youtube.com/watch?v=WCJM9WIoudI\n\n// a sketch that employs ml5 to detect human bodies which triggers a slit-scan photo capture\n\nlet video;\nlet bodyPose;\nlet poses = [];\n\nlet cols = 160; // no. of columns\nlet colWidth;\nlet capturedFrames = [];\nlet currentCol = 0;\nlet lastCaptureTime = 0;\nlet captureInterval = 1; //ms\nlet capturing = false;\nlet captureDirection = 1; // 1 towards right, -1 towards left\nlet triggered = false;\nlet lastPoseDetected = false;\n\n\nlet lastKeypointPos = null; // To store the last position of the keypoint\nlet minCaptureInterval = 1; // Minimum capture interval (ms)\nlet maxCaptureInterval = 20; // Maximum capture interval (ms)\n\nlet my = {};\n\nfunction preload() {\n  bodyPose = ml5.bodyPose({ flipped: true }); // ml5 with flipped video\n}\n\nfunction setup() {\n  createCanvas(windowWidth, windowHeight - 60);\n  // createCanvas(1600, 1200);\n  // colWidth = width / cols;\n\n  video = createCapture(VIDEO, () => {\n    console.log('createCapture callback width heigth', video.width, video.height);\n    my.layer = createGraphics(video.width, video.height);\n    colWidth = video.width / cols;\n  });\n  // video.size(960, 540);\n  // video.size(1920, 1080);\n  // video.size(1600, 1200);\n  video.hide();\n\n  // pose detection\n  bodyPose.detectStart(video, gotPoses);\n\n  create_ui();\n}\n\nfunction draw() {\n  let layer = my.layer;\n  if (!layer) {\n    // console.log('waiting for video', millis() / 1000);\n    return;\n    \n\n  }\n  render_layer(layer);\n  background(0);\n  let dw = width;\n  let dh = height;\n  let sw = layer.width;\n  let sh = layer.height;\n  // Correct for the video aspect ratio\n  dh = dw * (sh / sw);\n  // Image video to full width of canvas\n  // height is adjusted for aspect ratio\n  image(layer, 0, 0, dw, dh, 0, 0, sw, sh);\n    text(`Capture Interval: ${captureInterval.toFixed(1)} ms`, 20, 20);\n}\n\n// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])\n\nfunction render_layer(layer) {\n  // In video dimensions\n  let width = video.width;\n  let height = video.height;\n  layer.push();\n  layer.translate(width, 0);\n  layer.scale(-1, 1); // mirror the video\n  layer.image(video, 0, 0, width, height);\n  layer.pop();\n\n  let lapsed = millis() - lastCaptureTime > captureInterval;\n  if (capturing && lapsed && currentCol < cols && currentCol >= 0) {\n    let x = width - (currentCol + 1) * colWidth;\n    let colImage = createImage(colWidth, height);\n    // image of the column\n    colImage.copy(video, x, 0, colWidth, height, 0, 0, colWidth, height);\n\n    // flipping the columns horizontally\n    colImage.loadPixels();\n    for (let y = 0; y < colImage.height; y++) {\n      for (let i = 0; i < colWidth / 2; i++) {\n        let leftIdx = 4 * (y * colWidth + i);\n        let rightIdx = 4 * (y * colWidth + (colWidth - i - 1));\n        for (let k = 0; k < 4; k++) {\n          let temp = colImage.pixels[leftIdx + k];\n          colImage.pixels[leftIdx + k] = colImage.pixels[rightIdx + k];\n          colImage.pixels[rightIdx + k] = temp;\n        }\n      }\n    }\n    colImage.updatePixels();\n\n\n    // Store the captured column image & update capture state\n    capturedFrames[currentCol] = colImage;\n    lastCaptureTime = millis();\n    currentCol += captureDirection;\n\n    // Check if capture is complete\n    if (currentCol >= cols || currentCol < 0) {\n      capturing = false; // Stop capturing\n      triggered = false; // Allow new pose detection\n    }\n  }\n  // draw captured columns on the layer\n  for (let i = 0; i < capturedFrames.length; i++) {\n    if (capturedFrames[i]) {\n      layer.image(capturedFrames[i], i * colWidth, 0);\n    }\n  }\n}\n\n\n// function to map speed to capture interval—code by Copilot•\nfunction gotPoses(results) {\n  poses = results;\n  let poseNowDetected = poses.length > 0;\n\n  if (poseNowDetected) {\n    let pose = poses[0]; // Use the first detected pose\n    \n    // Try to find a keypoint with good confidence\n    let keypoint = null;\n    // nose as a keypoint metric\n    keypoint = pose.keypoints.find(kp => kp.part === \"nose\" && kp.confidence > 0.1);\n    \n    // If no keypoint found yet, use any keypoint with good confidence as in the second function\n    if (!keypoint) {\n      for (let j = 0; j < pose.keypoints.length; j++) {\n        if (pose.keypoints[j].confidence > 0.1) {\n          keypoint = pose.keypoints[j];\n          break;\n        }\n      }\n    }\n\n    if (keypoint) {\n      // Calculate speed of the keypoint (from first function)\n      if (lastKeypointPos) {\n        // Get position, accounting for both position.x/y (first function) and x/y (second function)\n        let kpX = keypoint.position ? keypoint.position.x : keypoint.x;\n        let kpY = keypoint.position ? keypoint.position.y : keypoint.y;\n        \n        let dx = kpX - lastKeypointPos.x;\n        let dy = kpY - lastKeypointPos.y;\n        let speed = dist(0, 0, dx, dy); // Speed is the distance moved between frames\n        \n        // Mapping movement of keypoint between pixels to capture interval\n        captureInterval = map(speed, 1, 5, maxCaptureInterval, minCaptureInterval);\n        captureInterval = constrain(captureInterval, minCaptureInterval, maxCaptureInterval);\n        \n        // Debug\n        console.log(`Speed: ${speed}, Interval: ${captureInterval}`);\n      }\n      \n      // Update the last keypoint position\n      lastKeypointPos = { \n        x: keypoint.position ? keypoint.position.x : keypoint.x, \n        y: keypoint.position ? keypoint.position.y : keypoint.y \n      };\n      \n      // Trigger capture if not already capturing (logic from both functions)\n      if (!capturing && !triggered) {\n        // Get the position, handling both data structures\n        let posX = keypoint.position ? keypoint.position.x : keypoint.x;\n        let section = getSection(posX);\n        \n        if (section === \"left\") {\n          currentCol = 0;\n          captureDirection = 1;\n        } else if (section === \"right\") {\n          currentCol = cols - 1;\n          captureDirection = -1;\n        } else {\n          // Do nothing if subject is in the center\n          lastPoseDetected = poseNowDetected;\n          return;\n        }\n        \n        capturedFrames = [];\n        capturing = true;\n        triggered = true;\n        lastCaptureTime = millis();\n      }\n    }\n  }\n\n  lastPoseDetected = poseNowDetected;\n}\n\n// where the subject is in the frame\nfunction getSection(x) {\n  // In video dimensions\n  let width = video.width;\n  if (x < width / 3) return 'left';\n  if (x > (2 * width) / 3) return 'right';\n  return 'center';\n}\n\n// Save image on keypress\nfunction keyPressed() {\n  if (key === 's' || key === 'S') {\n    saveCanvas('slit-scan-capture', 'png');\n  }\n}\n\nfunction create_ui() {\n  my.fullScreenBtn = createButton('Full Screen');\n  my.fullScreenBtn.mousePressed(full_screen_action);\n  my.fullScreenBtn.style('font-size:42px');\n}\n\nfunction full_screen_action() {\n  my.fullScreenBtn.remove();\n  fullscreen(1);\n  let delay = 3000;\n  setTimeout(ui_present_window, delay);\n}\n\nfunction ui_present_window() {\n  resizeCanvas(windowWidth, windowHeight);\n  // init_dim();\n}\n\nfunction windowResized() {\n  resizeCanvas(windowWidth, windowHeight);\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": true,
+        "_id": "680b99f1c205379b962570f5",
+        "createdAt": "2025-05-02T13:36:33.775Z",
+        "updatedAt": "2025-05-02T13:36:33.775Z",
+        "id": "680b99f1c205379b962570f5"
+      },
+      {
+        "name": "style.css",
+        "content": "html, body {\n  margin: 0;\n  padding: 0;\n}\ncanvas {\n  display: block;\n}\n",
+        "children": [],
+        "fileType": "file",
+        "isSelectedFile": false,
+        "_id": "680b99f1c205379b962570f6",
+        "createdAt": "2025-05-02T13:36:33.775Z",
+        "updatedAt": "2025-05-02T13:36:33.775Z",
+        "id": "680b99f1c205379b962570f6"
+      }
+    ],
+    "createdAt": "2025-04-25T14:19:30.144Z",
+    "updatedAt": "2025-05-02T13:36:33.775Z",
+    "id": "PCh5Aznez"
   },
   {
     "_id": "514d4Oj01",

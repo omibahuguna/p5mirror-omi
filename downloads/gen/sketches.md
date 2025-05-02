@@ -1,5 +1,5 @@
 # Sketches for omi99
-137 sketches  
+140 sketches  
 [10 Redtangles](https://editor.p5js.org/omi99/sketches/FllHYkIKA)<!-- 2024-09-19T17:00:05.405Z -->  
 [10.1](https://editor.p5js.org/omi99/sketches/N3tL9l8Xt)<!-- 2024-11-18T00:44:39.705Z -->  
 [10.2](https://editor.p5js.org/omi99/sketches/Dd4MxknJH)<!-- 2024-11-20T05:41:46.282Z -->  
@@ -50,8 +50,8 @@
 [Figure1](https://editor.p5js.org/omi99/sketches/D3Tk_6wK3)<!-- 2024-11-11T20:49:43.164Z -->  
 [Gem tuba](https://editor.p5js.org/omi99/sketches/fn36LLIGk)<!-- 2025-02-24T01:33:38.804Z -->  
 [gray boxes](https://editor.p5js.org/omi99/sketches/n3wG7ov5c)<!-- 2024-10-29T00:14:07.465Z -->  
-[helloWorld](https://editor.p5js.org/omi99/sketches/rafPm5zcI)<!-- 2025-03-31T03:32:22.291Z -->  
-[helloWorld 2](https://editor.p5js.org/omi99/sketches/_czmZi6jr)<!-- 2025-03-31T02:48:42.871Z -->  
+[helloWorld](https://editor.p5js.org/omi99/sketches/rafPm5zcI)<!-- 2025-04-06T19:23:27.014Z -->  
+[helloWorld 2](https://editor.p5js.org/omi99/sketches/_czmZi6jr)<!-- 2025-04-07T21:14:15.045Z -->  
 [hsb spec](https://editor.p5js.org/omi99/sketches/2iZvgF3xn)<!-- 2024-11-02T22:10:02.950Z -->  
 [ICM - WK10 - SAWTOOTh](https://editor.p5js.org/omi99/sketches/snDE6kWpv)<!-- 2024-11-12T22:38:50.676Z -->  
 [ICM - WK2 - animated shape copy](https://editor.p5js.org/omi99/sketches/8xkfuEtOe5)<!-- 2024-09-12T17:09:52.167Z -->  
@@ -128,6 +128,9 @@
 [three columns](https://editor.p5js.org/omi99/sketches/opBEfVgBZ)<!-- 2024-10-03T00:03:39.667Z -->  
 [TIME](https://editor.p5js.org/omi99/sketches/a6uX2x0C9)<!-- 2025-03-09T23:38:54.568Z -->  
 [Time2](https://editor.p5js.org/omi99/sketches/OOxEXNkjm)<!-- 2025-03-10T00:07:38.210Z -->  
+[Transience](https://editor.p5js.org/omi99/sketches/ohwy2A1tC)<!-- 2025-04-25T14:52:34.187Z -->  
+[Transience 2](https://editor.p5js.org/omi99/sketches/fceJhpMM6)<!-- 2025-04-28T14:05:31.778Z -->  
+[Transience omi v1.5](https://editor.p5js.org/omi99/sketches/PCh5Aznez)<!-- 2025-05-02T13:36:33.775Z -->  
 [Useful soy](https://editor.p5js.org/omi99/sketches/514d4Oj01)<!-- 2024-10-15T00:37:49.608Z -->  
 [W4: Re-write as a loop - I copy](https://editor.p5js.org/omi99/sketches/4RiSWFXK-)<!-- 2024-10-04T18:21:58.050Z -->  
 [W4: Re-write as a loop - III copy](https://editor.p5js.org/omi99/sketches/vNhvWv8u1)<!-- 2024-10-04T18:35:32.098Z -->  
